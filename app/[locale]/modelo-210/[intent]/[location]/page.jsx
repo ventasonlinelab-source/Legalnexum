@@ -1,5 +1,5 @@
 import {notFound} from 'next/navigation';
-import {getLanding,getLandingPaths} from '../../../../lib/pseo';
+import {getLanding,getLandingPaths} from '../../../../../lib/pseo';
 export const dynamicParams=false;
 export function generateStaticParams(){return getLandingPaths();}
 export async function generateMetadata({params}){const p=await params;const d=getLanding(p.locale,p.intent,p.location);if(!d)return {robots:{index:false,follow:false}};return {title:`Modelo 210 por alquiler en ${d.name} | LegalNexum`,description:`Información sobre el Modelo 210 para propietarios no residentes con alquileres en ${d.name} (${d.province}).`,alternates:{canonical:`https://www.legalnexum.com/es/modelo-210/alquiler/${d.location}/`}};}
