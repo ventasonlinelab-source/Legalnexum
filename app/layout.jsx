@@ -1,2 +1,3 @@
-export const metadata = { title: 'LegalNexum | Fiscalidad inmobiliaria para no residentes', description: 'Servicios fiscales para propietarios no residentes en España.' };
-export default function RootLayout({ children }) { return <html lang="es"><body style={{margin:0,fontFamily:'Arial, sans-serif',color:'#18253a'}}>{children}</body></html>; }
+import './globals.css';
+export const metadata={title:'LegalNexum | Fiscalidad inmobiliaria para no residentes',description:'Información fiscal para propietarios no residentes con inmuebles en España.'};
+export default function RootLayout({children}){return <html lang="es"><body>{children}</body></html>}
