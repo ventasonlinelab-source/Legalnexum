@@ -24,7 +24,7 @@ export default async function Landing({params}){
  <main><header className="hero"><div className="wrap hero-grid"><div><div className="eyebrow">Modelo 210 · {d.province} · {label}</div><h1>{d.title}</h1><p className="lead">{d.description} {intro}</p><div className="hero-actions"><a className="btn" href="#calculadora">{t.calculator} →</a><a className="btn" href="#contacto">{t.contact} →</a></div></div><aside className="sidecard"><div className="eyebrow">LegalNexum</div><h2>{label}</h2><p>{intro}</p><p className="micro">{t.disclaimer}</p></aside></div></header>
  <section className="section" id="obligaciones"><div className="wrap content-grid"><div><div className="eyebrow">Modelo 210</div><h2>{label} · {d.name}</h2><p>{intro}</p><p>{d.description}</p><p>{t.disclaimer}</p></div><aside className="note"><strong>{d.province}</strong><p>{d.autonomousCommunity}</p></aside></div></section>
  <Modelo210Calculator locale={locale} intent={intent} location={d.name}/>
- <LeadForm location={d.name}/>
+ <LeadForm location={d.name} locale={locale} intent={intent}/>
  </main><footer className="footer"><div className="wrap footer-row"><strong>LEGALNEXUM</strong><span>{t.disclaimer}</span><a href="https://sede.agenciatributaria.gob.es/" target="_blank" rel="noopener noreferrer">Agencia Tributaria ↗</a></div></footer>
  </>;
 }
