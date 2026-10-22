@@ -13,7 +13,7 @@ export default function Modelo210Calculator({locale='es',intent='alquiler',locat
  const base=amount(income)!==null&&(eligible?amount(expenses)!==null:true)&&(!eligible||Number(expenses)===0||expensesVerified)?Math.max(0,amount(income)-(eligible?amount(expenses):0)):null;
  const validDays=amount(days)!==null&&Number.isInteger(Number(days))&&Number(days)<=((new Date(Number(year),1,29).getMonth()===1)?366:365);
  const validOwner=amount(ownership)!==null&&Number(ownership)>0&&Number(ownership)<=100;
- const imputedBase=cadastralMode==='notified'?(cadastralStatus==='confirmed'&&percentage!=='unknown'&&amount(cadastral)!==null?amount(cadastral)*Number(percentage)/100:null):(amount(acquisitionValue)!==null&&amount(assessedValue)!==null?Math.max(amount(acquisitionValue),amount(assessedValue))*.5*.011:null);
+ const imputedBase=cadastralMode==='notified'?(cadastralStatus==='confirmed'&&percentage!=='unknown'&&amount(cadastral)!==null?amount(cadastral)*Number(percentage)/100:null):(amount(acquisitionValue)!==null&&Number(acquisitionValue)>0&&(assessedValue===''||amount(assessedValue)!==null)?Math.max(amount(acquisitionValue),assessedValue===''?0:amount(assessedValue))*.5*.011:null);
  const imputed=imputedBase!==null&&validDays&&validOwner?imputedBase*Number(days)/(new Date(Number(year),1,29).getMonth()===1?366:365)*Number(ownership)/100*rate:null;
  const gain=[sale,purchase,costs,acquisitionCosts,amortization].every(v=>amount(v)!==null)?(amount(sale)-amount(costs))-(amount(purchase)+amount(acquisitionCosts)-amount(amortization)):null;
  const withholding=amount(sale)===null?null:amount(sale)*.03;
