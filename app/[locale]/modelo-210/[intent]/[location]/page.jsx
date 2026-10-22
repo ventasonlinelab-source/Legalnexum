@@ -10,7 +10,7 @@ export async function generateMetadata({params}){
  const {locale,intent,location}=await params;
  const d=getLanding(locale,intent,location);
  if(!d)return {robots:{index:false,follow:false}};
- return {title:d.title+' | LegalNexum',description:d.description,robots:{index:d.isIndexable,follow:true},alternates:{canonical:'https://www.legalnexum.com/'+locale+'/modelo-210/'+intent+'/'+location+'/',...(d.isIndexable?{languages:buildHreflangAlternates({intent,location})}:{})}};
+ return {title:d.title+' | LegalNexum',description:d.description,robots:{index:d.isIndexable,follow:true},alternates:{canonical:'https://www.legalnexum.com/'+locale+'/modelo-210/'+intent+'/'+location,...(d.isIndexable?{languages:buildHreflangAlternates({intent,location})}:{})}};
 }
 export default async function Landing({params}){
  const {locale,intent,location}=await params;
