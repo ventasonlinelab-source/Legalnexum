@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {rentalEstimate,imputedEstimate,saleEstimate,filingWindow,daysInYear} from '../lib/modelo210-fiscal.js';
+import {rentalEstimate,imputedEstimate,saleEstimate,filingWindow,daysInYear} from '../lib/modelo210-fiscal.mjs';
 test('rental EU/EEA 19%, other 24%, expense documentation gate',()=>{
  assert.equal(rentalEstimate({income:12000,expenses:2000,eligible:true,expensesVerified:true}),1900);
  assert.equal(rentalEstimate({income:12000,expenses:2000,eligible:false}),2880);
