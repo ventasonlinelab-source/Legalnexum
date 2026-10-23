@@ -33,12 +33,12 @@ test('all published locales include fictional-example disclaimer',()=>{
  for(const fragment of ['ejemplos ficticios','fictional examples','fiktive Beispiele','exemples fictifs']) assert.ok(translations.includes(fragment),fragment);
  assert.match(calculator,/\{t\.disclaimer\}/);
 });
-test('calculator guards invalid inputs and preserves indexation gate',()=>{
- assert.match(calculator,/Number\.isFinite\(Number\(s\)\)/);
- assert.match(calculator,/validDays/);
- assert.match(calculator,/validOwner/);
+test('calculator delegates to tested fiscal module',()=>{
+ assert.match(calculator,/rentalEstimate\(/);
+ assert.match(calculator,/imputedEstimate\(/);
+ assert.match(calculator,/saleEstimate\(/);
+ assert.match(calculator,/filingWindow\(/);
  assert.match(calculator,/expensesVerified/);
- assert.match(calculator,/withholding=amount\(sale\)/);
 });
 test('robots declares sitemap and uses line feeds',()=>{
  assert.match(robots,/Sitemap: https:\/\/www\.legalnexum\.com\/sitemap\.xml/);
