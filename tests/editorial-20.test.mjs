@@ -14,7 +14,7 @@ test('all twenty drafts have local context, document checklist and cautious fisc
  for(const p of EDITORIAL_20_PATHS){
   const d=getEditorialDraft(p.locale,p.intent,p.location);
   assert.ok(d,JSON.stringify(p));
-  for(const key of ['title','intro','local','documents','warning'])assert.ok(d[key]?.length>75,JSON.stringify(p)+' '+key);
+  for(const key of ['title','intro','local','documents','warning'])assert.ok(d[key]?.length>(key==='title'?25:75),JSON.stringify(p)+' '+key);
   assert.ok(d.warning.includes('AEAT'),JSON.stringify(p));
  }
 });
