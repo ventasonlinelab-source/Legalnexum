@@ -15,7 +15,7 @@ export async function generateMetadata({params}){
  const {locale,intent,location}=await params;
  const d=getLanding(locale,intent,location);
  if(!d)return {robots:{index:false,follow:false}};
- return {title:d.title+' | LegalNexum',description:d.description,robots:{index:isApprovedRoute({locale,intent,location}),follow:true},alternates:{canonical:'https://www.legalnexum.com/'+locale+'/modelo-210/'+intent+'/'+location,...(approvedLocalesFor(intent,location).length>1&&isApprovedRoute({locale,intent,location})?{languages:buildHreflangAlternates({intent,location,availableLocales:approvedLocalesFor(intent,location)})}:{})}};
+ return {title:d.title+' | LegalNexum',description:(locale==='es'&&intent==='alquiler'&&location==='torrevieja')?'Modelo 210 por alquiler en Torrevieja para propietarios no residentes. Revisa ingresos, gastos deducibles, plazos y calcula una estimación orientativa.':d.description,robots:{index:isApprovedRoute({locale,intent,location}),follow:true},alternates:{canonical:'https://www.legalnexum.com/'+locale+'/modelo-210/'+intent+'/'+location,...(approvedLocalesFor(intent,location).length>1&&isApprovedRoute({locale,intent,location})?{languages:buildHreflangAlternates({intent,location,availableLocales:approvedLocalesFor(intent,location)})}:{})}};
 }
 export default async function Landing({params}){
  const {locale,intent,location}=await params;
