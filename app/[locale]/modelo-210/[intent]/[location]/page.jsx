@@ -4,6 +4,7 @@ import LeadForm from '../../../../../components/LeadForm';
 import {getLanding,getLandingPaths} from '../../../../../lib/pseo';
 import {getTranslations} from '../../../../../lib/pseo/translations';
 import {buildHreflangAlternates} from '../../../../../lib/pseo/locales';
+import {isApprovedRoute,approvedLocalesFor} from '../../../../../lib/pseo/publication';
 const EDITORIAL_PILOT = {locale:'es',intent:'alquiler',location:'torrevieja'};
 const isEditorialPilot = ({locale,intent,location}) => locale===EDITORIAL_PILOT.locale && intent===EDITORIAL_PILOT.intent && location===EDITORIAL_PILOT.location;
 export const dynamicParams=false;
@@ -12,7 +13,7 @@ export async function generateMetadata({params}){
  const {locale,intent,location}=await params;
  const d=getLanding(locale,intent,location);
  if(!d)return {robots:{index:false,follow:false}};
- return {title:d.title+' | LegalNexum',description:d.description,robots:{index:d.isIndexable||isEditorialPilot({locale,intent,location}),follow:true},alternates:{canonical:'https://www.legalnexum.com/'+locale+'/modelo-210/'+intent+'/'+location,...(d.isIndexable?{languages:buildHreflangAlternates({intent,location})}:{})}};
+ return {title:d.title+' | LegalNexum',description:d.description,robots:{index:isApprovedRoute({locale,intent,location}),follow:true},alternates:{canonical:'https://www.legalnexum.com/'+locale+'/modelo-210/'+intent+'/'+location,...(approvedLocalesFor(intent,location).length>1&&isApprovedRoute({locale,intent,location})?{languages:buildHreflangAlternates({intent,location,availableLocales:approvedLocalesFor(intent,location)})}:{})}};
 }
 export default async function Landing({params}){
  const {locale,intent,location}=await params;
