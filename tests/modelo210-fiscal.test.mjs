@@ -10,9 +10,9 @@ test('rental EU/EEA 19%, other 24%, expense documentation gate',()=>{
 });
 test('imputation 1.1%, 2%, half higher valuation and prorated share',()=>{
  const basic={year:2026,cadastralMode:'notified',cadastral:85000,cadastralConfirmed:true,days:365,ownership:100,eligible:true};
- assert.equal(imputedEstimate({...basic,percentage:'1.1'}),177.65);
+ assert.equal(Number(imputedEstimate({...basic,percentage:'1.1'}).toFixed(2)),177.65);
  assert.equal(imputedEstimate({...basic,percentage:'2'}),323);
- assert.equal(imputedEstimate({...basic,percentage:'1.1',ownership:50}),88.825);
+ assert.equal(Number(imputedEstimate({...basic,percentage:'1.1',ownership:50}).toFixed(3)),88.825);
  assert.equal(imputedEstimate({...basic,percentage:'unknown'}),null);
  assert.equal(imputedEstimate({...basic,days:366,percentage:'1.1'}),null);
  assert.equal(daysInYear(2024),366);
