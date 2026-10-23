@@ -6,6 +6,7 @@ import {getTranslations} from '../../../../../lib/pseo/translations';
 import {buildHreflangAlternates} from '../../../../../lib/pseo/locales';
 import {COASTAL_BATCH_10_20261023} from '../../../../../lib/pseo/coastal-batch-20261023';
 import {BENIDORM_PILOT} from '../../../../../lib/pseo/benidorm-pilot';
+import {COASTAL_NINE_EDITORIAL} from '../../../../../lib/pseo/coastal-nine-editorial';
 import {AEAT_210_GUIDANCE, COASTAL_TAX_NOTES, COASTAL_LINK_LABEL, COASTAL_DEADLINE_LABEL} from '../../../../../lib/pseo/coastal-tax-guidance';
 const EDITORIAL_PILOT = {locale:'es',intent:'alquiler',location:'torrevieja'};
 const isEditorialPilot = ({locale,intent,location}) => locale===EDITORIAL_PILOT.locale && intent===EDITORIAL_PILOT.intent && location===EDITORIAL_PILOT.location;
@@ -23,7 +24,7 @@ export default async function Landing({params}){
  if(!d)notFound();
  const t=getTranslations(locale);
  const stagedCoastal=COASTAL_BATCH_10_20261023.some(item=>item.slug===location);
- const benidormPilot=location===BENIDORM_PILOT.slug?BENIDORM_PILOT.copy[locale]:null;
+ const benidormPilot=location===BENIDORM_PILOT.slug?BENIDORM_PILOT.copy[locale]:COASTAL_NINE_EDITORIAL.find(item=>item.slug===location)?.copy[locale] || null;
  const label=t[intent==='alquiler'?'rental':intent==='imputacion'?'imputed':'sale'];
  const intro=t[intent==='alquiler'?'rentalDescription':intent==='imputacion'?'imputedDescription':'saleDescription'];
  return <>
