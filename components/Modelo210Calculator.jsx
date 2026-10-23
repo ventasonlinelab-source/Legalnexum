@@ -1,7 +1,7 @@
 'use client';
 import {useState} from 'react';
 import {getTranslations} from '../lib/pseo/translations';
-import {rentalEstimate,imputedEstimate,saleEstimate,filingWindow} from '../lib/modelo210-fiscal';
+import {rentalEstimate,imputedEstimate,saleEstimate,filingWindow} from '../lib/modelo210-fiscal.mjs';
 const style={width:'100%',padding:'12px',border:'1px solid #cbd6e4',borderRadius:7,fontSize:16};
 const amount=s=>s!==''&&Number.isFinite(Number(s))&&Number(s)>=0&&Number(s)<=100000000?Number(s):null;
 export default function Modelo210Calculator({locale='es',intent='alquiler',location}){
