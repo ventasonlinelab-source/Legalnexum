@@ -20,9 +20,9 @@ test('100 locations, three intents, four live locales are candidate-only',()=>{
  assert.match(locations,/verificationStatus: 'pending'/);
 });
 test('indexation requires verified location, except explicit editorial pilot',()=>{
- assert.match(landing,/index:d\.isIndexable\|\|isEditorialPilot/);
+ assert.match(landing,/index:isApprovedRoute/);
  assert.match(landing,/dynamicParams=false/);
- assert.match(sitemap,/getVerifiedLocationSlugs/);
+ assert.match(sitemap,/approvedRoutes/);
  assert.match(sitemap,/EDITORIAL_PILOT/);
  assert.doesNotMatch(sitemap,/getCandidateLandingPaths/);
 });
