@@ -26,7 +26,8 @@ test('no other locale, sale or noncohort locality gets these editorial drafts',(
 test('approval list stays independent from 20 draft candidates',()=>{
  const approvals=readFileSync(new URL('../lib/pseo/publication.js',import.meta.url),'utf8');
  assert.match(approvals,/locale:'es',intent:'alquiler',location:'torrevieja'/);
- assert.equal((approvals.match(/Object.freeze\(\{locale:/g)||[]).length,5);
+ assert.equal((approvals.match(/Object.freeze\(\{locale:/g)||[]).length,10);
  assert.match(approvals,/intent:'alquiler',location:'benidorm'/);
+ for(const route of ["intent:'alquiler',location:'guardamar-del-segura'","intent:'alquiler',location:'pilar-de-la-horadada'","intent:'alquiler',location:'alicante'","intent:'imputacion',location:'elche'","intent:'imputacion',location:'orihuela'"]) assert.ok(approvals.includes(route),route);
  assert.doesNotMatch(approvals,/intent:'venta',location:'benidorm'/);
 });
