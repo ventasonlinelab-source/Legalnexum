@@ -7,6 +7,13 @@ import {buildHreflangAlternates} from '../../../../../lib/pseo/locales';
 import {isApprovedRoute,approvedLocalesFor} from '../../../../../lib/pseo/publication';
 import {getEditorialDraft} from '../../../../../lib/pseo/editorial-20';
 import {getLocalScenario} from '../../../../../lib/pseo/local-scenarios-20';
+const SECOND_BATCH_META = Object.freeze({
+ 'es/alquiler/guardamar-del-segura':'Modelo 210 por alquiler en Guardamar del Segura: revisa reservas, cobros y días de uso privado antes de declarar tus rentas.',
+ 'es/alquiler/pilar-de-la-horadada':'Modelo 210 por alquiler en Pilar de la Horadada: organiza contratos de temporada, ingresos y períodos sin arrendar.',
+ 'es/alquiler/alicante':'Modelo 210 por alquiler en Alicante para no residentes: comprueba contratos, ingresos, gastos y residencia fiscal.',
+ 'es/imputacion/elche':'Modelo 210 por renta imputada en Elche: identifica tu inmueble, el valor catastral y los días a disposición.',
+ 'es/imputacion/orihuela':'Modelo 210 por renta imputada en Orihuela y Orihuela Costa: evita duplicar fincas y revisa titularidad y valor catastral.',
+});
 const EDITORIAL_PILOT = {locale:'es',intent:'alquiler',location:'torrevieja'};
 const isEditorialPilot = ({locale,intent,location}) => locale===EDITORIAL_PILOT.locale && intent===EDITORIAL_PILOT.intent && location===EDITORIAL_PILOT.location;
 export const dynamicParams=false;
@@ -15,7 +22,7 @@ export async function generateMetadata({params}){
  const {locale,intent,location}=await params;
  const d=getLanding(locale,intent,location);
  if(!d)return {robots:{index:false,follow:false}};
- return {title:d.title+' | LegalNexum',description:(locale==='es'&&intent==='alquiler'&&location==='torrevieja')?'Modelo 210 por alquiler en Torrevieja para propietarios no residentes. Revisa ingresos, gastos deducibles, plazos y calcula una estimación orientativa.':d.description,robots:{index:isApprovedRoute({locale,intent,location}),follow:true},alternates:{canonical:'https://www.legalnexum.com/'+locale+'/modelo-210/'+intent+'/'+location,...(approvedLocalesFor(intent,location).length>1&&isApprovedRoute({locale,intent,location})?{languages:buildHreflangAlternates({intent,location,availableLocales:approvedLocalesFor(intent,location)})}:{})}};
+ return {title:d.title+' | LegalNexum',description:SECOND_BATCH_META[[locale,intent,location].join('/')]??((locale==='es'&&intent==='alquiler'&&location==='torrevieja')?'Modelo 210 por alquiler en Torrevieja para propietarios no residentes. Revisa ingresos, gastos deducibles, plazos y calcula una estimación orientativa.':d.description),robots:{index:isApprovedRoute({locale,intent,location}),follow:true},alternates:{canonical:'https://www.legalnexum.com/'+locale+'/modelo-210/'+intent+'/'+location,...(approvedLocalesFor(intent,location).length>1&&isApprovedRoute({locale,intent,location})?{languages:buildHreflangAlternates({intent,location,availableLocales:approvedLocalesFor(intent,location)})}:{})}};
 }
 export default async function Landing({params}){
  const {locale,intent,location}=await params;
